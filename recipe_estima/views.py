@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-# from .models import Recipe, Ingredient
 from .models import Url
 
 
@@ -9,10 +8,15 @@ def url_input(request):
 def url_result(request):
     if request.method == 'POST':
         url = request.POST.get('url')
-        Url.objects.create(url=url)  # Zapisz adres URL do bazy danych
-        return render(request, 'url_result.html', {'url': url})
+        Url.objects.create(url=url)
+        return redirect('url_list')
     else:
         return redirect('url_input')
+
+
+def url_list(request):
+    urls = Url.objects.all()
+    return render(request, 'url_list.html', {'urls': urls})
 
 
 # def recipe_detail(request, recipe_id):
