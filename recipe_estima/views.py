@@ -8,7 +8,8 @@ def url_input(request):
 def url_result(request):
     if request.method == 'POST':
         url = request.POST.get('url')
-        Url.objects.create(url=url)
+        if not Url.objects.filter(url=url).exists():
+            Url.objects.create(url=url)
         return redirect('url_list')
     else:
         return redirect('url_input')
