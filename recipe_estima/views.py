@@ -19,6 +19,12 @@ def url_list(request):
     urls = Url.objects.all()
     return render(request, 'url_list.html', {'urls': urls})
 
+def recipe_detail(request, recipe_id):
+    recipe = Url.objects.get(id=recipe_id)
+    context = {
+        'recipe': recipe
+    }
+    return render(request, 'recipe_detail.html', context)
 
 # def recipe_detail(request, recipe_id):
 #     recipe = Recipe.objects.get(id=recipe_id)
