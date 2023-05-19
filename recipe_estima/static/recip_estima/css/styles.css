@@ -1,0 +1,10 @@
+.delete-link {
+    color: red;
+    margin-left: 10px;
+    text-decoration: none;
+}
+.delete-link span {
+    font-family: Arial;
+    font-weight: 800;
+    font-size: 15px;
+}

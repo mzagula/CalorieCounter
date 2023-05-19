@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Url
 
 
 def url_input(request):
     return render(request, 'url_input.html')
+
 
 def url_result(request):
     if request.method == 'POST':
@@ -19,12 +20,19 @@ def url_list(request):
     urls = Url.objects.all()
     return render(request, 'url_list.html', {'urls': urls})
 
+
 def recipe_detail(request, recipe_id):
     recipe = Url.objects.get(id=recipe_id)
     context = {
         'recipe': recipe
     }
     return render(request, 'recipe_detail.html', context)
+
+
+def recipe_delete(request, recipe_id):
+    url = get_object_or_404(Url, pk=recipe_id)
+    url.delete()
+    return redirect('url_list')
 
 # def recipe_detail(request, recipe_id):
 #     recipe = Recipe.objects.get(id=recipe_id)
