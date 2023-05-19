@@ -11,7 +11,11 @@ def url_result(request):
         url = request.POST.get('url')
         if not Url.objects.filter(url=url).exists():
             Url.objects.create(url=url)
-        return redirect('url_list')
+            recipe = Url.objects.get(url=url)
+            context = {
+                'recipe': recipe
+            }
+            return render(request, 'recipe_detail.html', context)
     else:
         return redirect('url_input')
 
