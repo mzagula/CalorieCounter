@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Url
+from bs4 import BeautifulSoup
+import requests
 
 
 def url_input(request):
@@ -10,12 +12,14 @@ def url_result(request):
     if request.method == 'POST':
         url = request.POST.get('url')
         if not Url.objects.filter(url=url).exists():
-            Url.objects.create(url=url)
-            recipe = Url.objects.get(url=url)
-            context = {
-                'recipe': recipe
-            }
-            return render(request, 'recipe_detail.html', context)
+            response = requests.get(url)
+            html = response.text
+            soup = BeautifulSoup(html, 'html.parser')
+            h1_tag = soup.find('h1', class_='przepis page-header')
+            recipe_header = h1_tag.text.strip()
+            Url.objects.create(url=url, recipe_header=recipe_header)
+            recipe = Url.objects.filter(url=url).first()
+            return redirect('recipe_detail', recipe_id=recipe.id)
     else:
         return redirect('url_input')
 
