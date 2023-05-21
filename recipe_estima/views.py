@@ -17,7 +17,15 @@ def url_result(request):
             soup = BeautifulSoup(html, 'html.parser')
             h1_tag = soup.find('h1', class_='przepis page-header')
             recipe_header = h1_tag.text.strip()
-            Url.objects.create(url=url, recipe_header=recipe_header)
+            div_ingredients = soup.find('div', class_='field field-name-field-skladniki field-type-text-long '
+                                                      'field-label-hidden')
+            li_elements = div_ingredients.find_all('li')
+            ingred_elements = []
+            for li in li_elements:
+                element = li.text.strip()
+                ingred_elements.append(element)
+            ingredients = ','.join(ingred_elements)
+            Url.objects.create(url=url, recipe_header=recipe_header, ingredients=ingredients)
             recipe = Url.objects.filter(url=url).first()
             return redirect('recipe_detail', recipe_id=recipe.id)
     else:
@@ -32,7 +40,8 @@ def url_list(request):
 def recipe_detail(request, recipe_id):
     recipe = Url.objects.get(id=recipe_id)
     context = {
-        'recipe': recipe
+        'recipe': recipe,
+        'ingredients': recipe.ingredients.split(",")
     }
     return render(request, 'recipe_detail.html', context)
 

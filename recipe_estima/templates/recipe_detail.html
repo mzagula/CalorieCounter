@@ -4,7 +4,9 @@
 </ul>
 <h2>Skladniki:</h2>
 <ul>
-  <li>Tresc</li>
+  {% for ingred in ingredients %}
+    <li>{{ ingred }}</li>
+  {% endfor %}
 </ul>
 <h2>Kalorie:</h2>
 <ul>
