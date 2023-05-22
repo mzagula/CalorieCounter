@@ -28,8 +28,8 @@ def url_result(request):
             Url.objects.create(url=url, recipe_header=recipe_header, ingredients=ingredients)
             recipe = Url.objects.filter(url=url).first()
             return redirect('recipe_detail', recipe_id=recipe.id)
-    else:
-        return redirect('url_input')
+        else:
+            return redirect('url_input')
 
 
 def url_list(request):
