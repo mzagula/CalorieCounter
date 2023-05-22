@@ -20,11 +20,11 @@ def url_result(request):
             div_ingredients = soup.find('div', class_='field field-name-field-skladniki field-type-text-long '
                                                       'field-label-hidden')
             li_elements = div_ingredients.find_all('li')
-            ingred_elements = []
+            ingrid_elements = []
             for li in li_elements:
                 element = li.text.strip()
-                ingred_elements.append(element)
-            ingredients = ','.join(ingred_elements)
+                ingrid_elements.append(element)
+            ingredients = ','.join(ingrid_elements)
             Url.objects.create(url=url, recipe_header=recipe_header, ingredients=ingredients)
             recipe = Url.objects.filter(url=url).first()
             return redirect('recipe_detail', recipe_id=recipe.id)
