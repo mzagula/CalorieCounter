@@ -1,8 +1,17 @@
 from django.db import models
 
+
 class Recipe(models.Model):
     class Meta:
         app_label = 'recipe_estima'
+
+
+class Calorie(models.Model):
+    ingredient = models.CharField(max_length=20)
+    calorie = models.IntegerField()
+
+    def __str__(self):
+        return self.ingredient
 
 
 class Url(models.Model):
@@ -10,20 +19,9 @@ class Url(models.Model):
     recipe_header = models.CharField(max_length=50, default='Tytul Przepisu')
     ingredients = models.CharField(max_length=200, default='skladniki')
     description = models.CharField(max_length=2000, default='opis')
+    calorie = models.ManyToManyField(Calorie)
 
     def __str__(self):
         return self.url
 
 
-#     title = models.CharField(max_length=200)
-#     instructions = models.TextField()
-#     servings = models.IntegerField()
-#     image_url = models.URLField()
-#     created_at = models.DateTimeField(auto_now_add=True)
-#
-# class Ingredient(models.Model):
-#     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-#     name = models.CharField(max_length=200)
-#     quantity = models.FloatField()
-#     unit = models.CharField(max_length=20)
-#     calories_per_unit = models.FloatField()

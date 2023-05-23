@@ -1,0 +1,12 @@
+<table>
+    <tr>
+        <th>Skladnik</th>
+        <th>Kalorie</th>
+    </tr>
+    {% for calorie in calories %}
+    <tr>
+        <td>{{ calorie.ingredient }}</td>
+        <td>{{ calorie.calorie }}</td>
+    </tr>
+    {% endfor %}
+</table>

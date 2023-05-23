@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Url
+from .models import Url, Calorie
 from bs4 import BeautifulSoup
 import requests
 
@@ -59,13 +59,10 @@ def recipe_delete(request, recipe_id):
     url.delete()
     return redirect('url_list')
 
-# def recipe_detail(request, recipe_id):
-#     recipe = Recipe.objects.get(id=recipe_id)
-#     ingredients = Ingredient.objects.filter(recipe=recipe)
-#     total_calories = sum(i.calories_per_unit * i.quantity for i in ingredients)
-#     context = {
-#         'recipe': recipe,
-#         'ingredients': ingredients,
-#         'total_calories': total_calories,
-#     }
-#     return render(request, 'recipe_detail.html', context)
+
+def recipe_calorie(request):
+    calories = Calorie.objects.all()
+    context = {
+        'calories': calories,
+    }
+    return render(request, 'recipe_calorie.html', context)
