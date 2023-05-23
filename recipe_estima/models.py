@@ -9,6 +9,7 @@ class Url(models.Model):
     url = models.URLField()
     recipe_header = models.CharField(max_length=50, default='Tytul Przepisu')
     ingredients = models.CharField(max_length=200, default='skladniki')
+    description = models.CharField(max_length=2000, default='opis')
 
     def __str__(self):
         return self.url

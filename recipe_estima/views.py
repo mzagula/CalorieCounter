@@ -25,7 +25,15 @@ def url_result(request):
                 element = li.text.strip()
                 ingrid_elements.append(element)
             ingredients = ','.join(ingrid_elements)
-            Url.objects.create(url=url, recipe_header=recipe_header, ingredients=ingredients)
+            div_description = soup.find('div', class_='field field-name-field-przygotowanie field-type-text-long '
+                                                      'field-label-above')
+            li_elements_descr = div_description.find_all('li')
+            descr_elements = []
+            for li in li_elements_descr:
+                element = li.text.strip()
+                descr_elements.append(element)
+            description = ','.join(descr_elements)
+            Url.objects.create(url=url, recipe_header=recipe_header, ingredients=ingredients, description=description)
             recipe = Url.objects.filter(url=url).first()
             return redirect('recipe_detail', recipe_id=recipe.id)
         else:
