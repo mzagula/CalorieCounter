@@ -3,14 +3,23 @@
     <head>
         <title>RecipEstima</title>
         <link rel="stylesheet" type="text/css" href="{% static 'recip_estima/css/styles.css' %}">
-        <h1>Lista przepisów:</h1>
-        <u1>
-            {% for url in urls %}
-                <li>
-                    <a href="{% url 'recipe_detail' recipe_id=url.id %}">{{ url.url }}</a>
-                    <a href="{% url 'recipe_delete' recipe_id=url.id %}" class="delete-link" styles="font-weight: bold;"><span>&times;</span></a>
-                </li>
-            {% endfor %}
-        </u1>
+        <table class="recipe-table">
+                <tr>
+                    <th>Przepisy</th>
+                </tr>
+                {% for url in urls %}
+                    <tr onclick="showRecipe('{{ url.id }}')">
+                        <td>{{ url.recipe_header }}</td>
+                        <td>
+                            <a href="{% url 'recipe_delete' recipe_id=url.id %}" class="delete-link"><span>&times;</span></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+        </table>
+        <script>
+            function showRecipe(recipeId) {
+                window.location.href = `/recip_estima/recipe_detail/${recipeId}`;
+            }
+        </script>
     </head>
 </html>

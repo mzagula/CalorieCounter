@@ -8,3 +8,16 @@
     font-weight: 800;
     font-size: 15px;
 }
+.recipe-table tr:hover {
+    background-color: #e6e6e6;
+    cursor: pointer;
+}
+.recipe-table {
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+  }
+.recipe-table th,
+.recipe-table td {
+    padding: 8px;
+    border-top: 1px solid #ccc;
+}
