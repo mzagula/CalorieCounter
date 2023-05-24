@@ -1,8 +1,9 @@
 {% load static %}
+<script src="{% static 'recip_estima/js/script.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'recip_estima/css/styles.css' %}">
 <html>
     <head>
         <title>RecipEstima</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'recip_estima/css/styles.css' %}">
         <table class="recipe-table">
                 <h1>Przepisy
                 </h1>
@@ -22,19 +23,19 @@
         </table>
 
 
-        <script>
-            function showRecipe(recipeId) {
-                window.location.href = `/recip_estima/recipe_detail/${recipeId}`;
-            }
-            function showConfirmationDialog(recipeId) {
-                document.getElementById("confirmation-dialog").style.display = "block";
-            }
-            function hideConfirmationDialog() {
-                document.getElementById("confirmation-dialog").style.display = "none";
-            }
-            function deleteRecipe(recipeId) {
-                window.location.href = `/recip_estima/recipe_delete/${recipeId}`;
-            }
-        </script>
+<!--        <script>-->
+<!--            function showRecipe(recipeId) {-->
+<!--                window.location.href = `/recip_estima/recipe_detail/${recipeId}`;-->
+<!--            }-->
+<!--            function showConfirmationDialog(recipeId) {-->
+<!--                document.getElementById("confirmation-dialog").style.display = "block";-->
+<!--            }-->
+<!--            function hideConfirmationDialog() {-->
+<!--                document.getElementById("confirmation-dialog").style.display = "none";-->
+<!--            }-->
+<!--            function deleteRecipe(recipeId) {-->
+<!--                window.location.href = `/recip_estima/recipe_delete/${recipeId}`;-->
+<!--            }-->
+<!--        </script>-->
     </head>
 </html>
