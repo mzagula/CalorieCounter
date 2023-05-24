@@ -8,6 +8,9 @@
     font-weight: 800;
     font-size: 15px;
 }
+.delete-link span:hover {
+    font-size: 30px;
+}
 .recipe-table tr:hover {
     background-color: #e6e6e6;
     cursor: pointer;
@@ -20,4 +23,14 @@
 .recipe-table td {
     padding: 8px;
     border-top: 1px solid #ccc;
+}
+.centered-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
