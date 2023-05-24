@@ -4,10 +4,6 @@ from bs4 import BeautifulSoup
 import requests
 
 
-def url_input(request):
-    return render(request, 'url_input.html')
-
-
 def url_result(request):
     if request.method == 'POST':
         url = request.POST.get('url')

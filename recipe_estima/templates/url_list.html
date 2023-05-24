@@ -21,5 +21,10 @@
                     </div>
                 {% endfor %}
         </table>
+        <form method="POST" action="{% url 'url_result' %}" style="margin-top: 5px;">
+            {% csrf_token %}
+            <input type="text" name="url" placeholder="Write recipe URL">
+            <input type="submit" value="Add">
+        </form>
     </head>
 </html>
