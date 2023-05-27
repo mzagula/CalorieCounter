@@ -5,8 +5,7 @@
     <head>
         <title>RecipEstima</title>
         <table class="recipe-table">
-                <h1>Przepisy
-                </h1>
+                <h1>Recipes</h1>
                 {% for url in urls %}
                     <tr>
                         <td onclick="showRecipe('{{ url.id }}')">{{ url.recipe_header }}</td>
