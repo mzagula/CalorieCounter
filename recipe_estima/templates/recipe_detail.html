@@ -1,10 +1,10 @@
 {% load static %}
 <script src="{% static 'recip_estima/js/script.js' %}"></script>
 <h1>{{ recipe.recipe_header }}</h1>
-<button id="edit-button" onclick="enableEditMode()">Edit</button>
 <input type="text" id="edit-field" style="display: none;">
 <ul>
-  <div id="display-field">{{ recipe.description }}</div>
+  <div id="display-field" ondblclick="enableEditMode()">{{ recipe.description }}
+  </div>
 </ul>
 <h2>Ingredients:</h2>
 <ul>
