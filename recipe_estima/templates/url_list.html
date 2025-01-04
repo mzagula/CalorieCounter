@@ -1,29 +1,32 @@
-{% load static %}
-<script src="{% static 'recip_estima/js/script.js' %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'recip_estima/css/styles.css' %}">
+<!DOCTYPE html>
 <html>
     <head>
-        <title>RecipEstima</title>
-        <table class="recipe-table">
-                <h1>Recipes</h1>
-                {% for url in urls %}
-                    <tr>
-                        <td onclick="showRecipe('{{ url.id }}')">{{ url.recipe_header }}</td>
-                        <td class="delete-link">
-                            <span onclick="showConfirmationDialog()">&times;</span>
-                        </td>
-                    </tr>
-                    <div id="confirmation-dialog" class="centered-dialog" style="display: none;">
-                          <p>Are you sure you want to delete?</p>
-                          <button onclick="deleteRecipe('{{ url.id }}')">Yes</button>
-                          <button onclick="hideConfirmationDialog()">No</button>
-                    </div>
-                {% endfor %}
-        </table>
-        <form method="POST" action="{% url 'url_result' %}" style="margin-top: 5px;">
-            {% csrf_token %}
-            <input type="text" name="url" placeholder="Write recipe URL">
-            <input type="submit" value="Add">
-        </form>
+        <title>CalorieCounter - Lista przepisów</title>
+        {% load static %}
+        <script src="{% static 'recip_estima/js/script.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'recip_estima/css/styles.css' %}">
     </head>
+    <body>
+        <h1>Kalkulator Kalorii</h1>
+        
+        <!-- Formularz do dodawania nowego URL -->
+        <form method="POST" action="{% url 'recipe_estima:url_result' %}">
+            {% csrf_token %}
+            <input type="url" name="url" placeholder="Wklej link do przepisu" required>
+            <button type="submit">Dodaj przepis</button>
+        </form>
+
+        <!-- Lista zapisanych przepisów -->
+        <h2>Zapisane przepisy:</h2>
+        <ul>
+        {% for url in urls %}
+            <li>
+                <a href="{% url 'recipe_estima:recipe_detail' recipe_id=url.id %}">{{ url.recipe_header }}</a>
+                <a href="{% url 'recipe_estima:recipe_delete' recipe_id=url.id %}">[Usuń]</a>
+            </li>
+        {% endfor %}
+        </ul>
+
+        <a href="{% url 'recipe_estima:recipe_calorie' %}">Zobacz tabelę kalorii</a>
+    </body>
 </html>

@@ -17,6 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('recip_estima/', include('recipe_estima.urls')),
     path('admin/', admin.site.urls),
+    path('', include('recipe_estima.urls')),
 ]

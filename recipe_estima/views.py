@@ -13,16 +13,14 @@ def url_result(request):
             soup = BeautifulSoup(html, 'html.parser')
             h1_tag = soup.find('h1', class_='przepis page-header')
             recipe_header = h1_tag.text.strip()
-            div_ingredients = soup.find('div', class_='field field-name-field-skladniki field-type-text-long '
-                                                      'field-label-hidden')
+            div_ingredients = soup.find('div', class_='field field-name-field-skladniki field-type-text-long field-label-hidden')
             li_elements = div_ingredients.find_all('li')
             ingrid_elements = []
             for li in li_elements:
                 element = li.text.strip()
                 ingrid_elements.append(element)
             ingredients = ','.join(ingrid_elements)
-            div_description = soup.find('div', class_='field field-name-field-przygotowanie field-type-text-long '
-                                                      'field-label-above')
+            div_description = soup.find('div', class_='field field-name-field-przygotowanie field-type-text-long field-label-above')
             li_elements_descr = div_description.find_all('li')
             descr_elements = []
             for li in li_elements_descr:
@@ -31,9 +29,9 @@ def url_result(request):
             description = ','.join(descr_elements)
             Url.objects.create(url=url, recipe_header=recipe_header, ingredients=ingredients, description=description)
             recipe = Url.objects.filter(url=url).first()
-            return redirect('recipe_detail', recipe_id=recipe.id)
+            return redirect('recipe_estima:recipe_detail', recipe_id=recipe.id)
         else:
-            return redirect('url_input')
+            return redirect('recipe_estima:home')
 
 
 def url_list(request):
@@ -62,3 +60,11 @@ def recipe_calorie(request):
         'calories': calories,
     }
     return render(request, 'recipe_calorie.html', context)
+
+
+def home(request):
+    return render(request, 'recipe_estima/home.html')
+
+
+def url_input(request):
+    return render(request, 'url_input.html')
