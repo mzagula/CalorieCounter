@@ -46,21 +46,19 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Product</th>
+                                <th>Ingredient</th>
                                 <th>Calories (per 100g)</th>
-                                <th>Category</th>
                             </tr>
                         </thead>
                         <tbody>
-                        {% for calorie in calories %}
+                        {% for item in calories %}
                             <tr>
-                                <td>{{ calorie.product_name }}</td>
-                                <td>{{ calorie.calories }}</td>
-                                <td>{{ calorie.category }}</td>
+                                <td>{{ item.ingredient }}</td>
+                                <td>{{ item.calorie }}</td>
                             </tr>
                         {% empty %}
                             <tr>
-                                <td colspan="3">No products available</td>
+                                <td colspan="2">No ingredients available</td>
                             </tr>
                         {% endfor %}
                         </tbody>

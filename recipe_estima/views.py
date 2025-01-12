@@ -55,10 +55,9 @@ def recipe_delete(request, recipe_id):
 
 
 def recipe_calorie(request):
-    calories = Calorie.objects.all()
+    calories = Calorie.objects.all().order_by('ingredient')
     context = {
         'calories': calories,
-        'active_section': 'calorie_table'
     }
     return render(request, 'recipe_calorie.html', context)
 

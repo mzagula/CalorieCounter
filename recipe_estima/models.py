@@ -7,7 +7,7 @@ class Recipe(models.Model):
 
 
 class Calorie(models.Model):
-    ingredient = models.CharField(max_length=20)
+    ingredient = models.CharField(max_length=100)
     calorie = models.IntegerField()
 
     def __str__(self):
