@@ -9,27 +9,37 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="main-title">Kalkulator Kalorii</h1>
+            <nav class="sidebar">
+                <h2 class="menu-title">Menu</h2>
+                <ul class="menu-list">
+                    <li><a href="{% url 'recipe_estima:home' %}">Strona główna</a></li>
+                    <li><a href="{% url 'recipe_estima:url_list' %}">Lista przepisów</a></li>
+                    <li><a href="{% url 'recipe_estima:recipe_calorie' %}">Tabela kalorii</a></li>
+                    <li><a href="{% url 'recipe_estima:url_input' %}">Dodaj przepis</a></li>
+                </ul>
+            </nav>
             
-            <!-- Formularz do dodawania nowego URL -->
-            <form method="POST" action="{% url 'recipe_estima:url_result' %}">
-                {% csrf_token %}
-                <input type="url" name="url" placeholder="Wklej link do przepisu" required>
-                <button type="submit">Dodaj przepis</button>
-            </form>
+            <main class="main-content">
+                <h1 class="main-title">Kalkulator Kalorii</h1>
+                
+                <!-- Formularz do dodawania nowego URL -->
+                <form method="POST" action="{% url 'recipe_estima:url_result' %}">
+                    {% csrf_token %}
+                    <input type="url" name="url" placeholder="Wklej link do przepisu" required>
+                    <button type="submit">Dodaj przepis</button>
+                </form>
 
-            <!-- Lista zapisanych przepisów -->
-            <h2>Zapisane przepisy:</h2>
-            <ul>
-            {% for url in urls %}
-                <li>
-                    <a href="{% url 'recipe_estima:recipe_detail' recipe_id=url.id %}">{{ url.recipe_header }}</a>
-                    <a href="{% url 'recipe_estima:recipe_delete' recipe_id=url.id %}">[Usuń]</a>
-                </li>
-            {% endfor %}
-            </ul>
-
-            <a href="{% url 'recipe_estima:recipe_calorie' %}">Zobacz tabelę kalorii</a>
+                <!-- Lista zapisanych przepisów -->
+                <h2>Zapisane przepisy:</h2>
+                <ul>
+                {% for url in urls %}
+                    <li>
+                        <a href="{% url 'recipe_estima:recipe_detail' recipe_id=url.id %}">{{ url.recipe_header }}</a>
+                        <a href="{% url 'recipe_estima:recipe_delete' recipe_id=url.id %}">[Usuń]</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </main>
         </div>
     </body>
 </html>
