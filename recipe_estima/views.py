@@ -11,16 +11,16 @@ def url_result(request):
             response = requests.get(url)
             html = response.text
             soup = BeautifulSoup(html, 'html.parser')
-            h1_tag = soup.find('h1', class_='przepis page-header')
+            h1_tag = soup.find('h1', class_='recipe page-header')
             recipe_header = h1_tag.text.strip()
-            div_ingredients = soup.find('div', class_='field field-name-field-skladniki field-type-text-long field-label-hidden')
+            div_ingredients = soup.find('div', class_='field field-name-field-ingredients field-type-text-long field-label-hidden')
             li_elements = div_ingredients.find_all('li')
             ingrid_elements = []
             for li in li_elements:
                 element = li.text.strip()
                 ingrid_elements.append(element)
             ingredients = ','.join(ingrid_elements)
-            div_description = soup.find('div', class_='field field-name-field-przygotowanie field-type-text-long field-label-above')
+            div_description = soup.find('div', class_='field field-name-field-preparation field-type-text-long field-label-above')
             li_elements_descr = div_description.find_all('li')
             descr_elements = []
             for li in li_elements_descr:
