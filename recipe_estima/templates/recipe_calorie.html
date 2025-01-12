@@ -1,13 +1,72 @@
-
-<table>
-    <tr>
-        <th>Ingredients</th>
-        <th>Calories</th>
-    </tr>
-    {% for calorie in calories %}
-    <tr>
-        <td>{{ calorie.ingredient }}</td>
-        <td>{{ calorie.calorie }}</td>
-    </tr>
-    {% endfor %}
-</table>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CalorieCounter - Calorie Table</title>
+        {% load static %}
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <script src="{% static 'recipe_estima/js/script.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'recipe_estima/css/styles.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <nav class="sidebar">
+                <ul class="menu-list">
+                    <li>
+                        <a href="{% url 'recipe_estima:home' %}">
+                            <i class="fas fa-home menu-icon"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'recipe_estima:url_list' %}">
+                            <i class="fas fa-list menu-icon"></i>
+                            Recipe List
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'recipe_estima:recipe_calorie' %}">
+                            <i class="fas fa-calculator menu-icon"></i>
+                            Calorie Table
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'recipe_estima:url_input' %}">
+                            <i class="fas fa-plus menu-icon"></i>
+                            Add Recipe
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <main class="main-content">
+                <h1 class="main-title">Calorie Table</h1>
+                
+                <div class="calorie-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Calories (per 100g)</th>
+                                <th>Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for calorie in calories %}
+                            <tr>
+                                <td>{{ calorie.product_name }}</td>
+                                <td>{{ calorie.calories }}</td>
+                                <td>{{ calorie.category }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3">No products available</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

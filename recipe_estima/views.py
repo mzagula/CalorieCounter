@@ -58,6 +58,7 @@ def recipe_calorie(request):
     calories = Calorie.objects.all()
     context = {
         'calories': calories,
+        'active_section': 'calorie_table'
     }
     return render(request, 'recipe_calorie.html', context)
 
